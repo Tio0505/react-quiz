@@ -1,7 +1,18 @@
-import { useQuizData } from "../context/QuizContext";
+import PropTypes from "prop-types";
 
-export default function FinishScreen() {
-  const { points, maxPossiblePoints, highscore, dispatch } = useQuizData();
+FinishScreen.propTypes = {
+  maxPossiblePoints: PropTypes.number.isRequired,
+  points: PropTypes.number,
+  highscore: PropTypes.number,
+  dispatch: PropTypes.func,
+};
+
+export default function FinishScreen({
+  points,
+  maxPossiblePoints,
+  highscore,
+  dispatch,
+}) {
   const percentage = (points / maxPossiblePoints) * 100;
 
   let emoji;

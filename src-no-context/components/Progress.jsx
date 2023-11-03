@@ -1,4 +1,4 @@
-import { useQuizData } from "../context/QuizContext";
+import { useQuizData } from "../../src/context/QuizContext";
 
 export default function Progress() {
   const { index, points, numQuestions, maxPossiblePoints, answer } =

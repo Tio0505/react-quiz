@@ -1,14 +1,7 @@
-import PropTypes from "prop-types";
+import { useQuizData } from "../context/QuizContext";
 
-StartScreen.propTypes = {
-  numQuestions: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
-
-export default function StartScreen({ numQuestions, dispatch }) {
-  function handleStart() {
-    dispatch({ type: "startQuiz" });
-  }
+export default function StartScreen() {
+  const { handleStart, numQuestions } = useQuizData();
 
   return (
     <div className="start">

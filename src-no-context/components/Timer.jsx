@@ -1,19 +1,24 @@
 import { useEffect } from "react";
-import { useQuizData } from "../context/QuizContext";
+import PropTypes from "prop-types";
 
-export default function Timer() {
-  const { secondRemaining, setTimerTick } = useQuizData();
+Timer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  secondRemaining: PropTypes.number,
+};
 
+export default function Timer({ dispatch, secondRemaining }) {
   const mins = Math.floor(secondRemaining / 60);
   const seconds = secondRemaining % 60;
 
   useEffect(
     function () {
-      const id = setInterval(setTimerTick, 1000);
+      const id = setInterval(() => {
+        dispatch({ type: "tick" });
+      }, 1000);
 
       return () => clearInterval(id);
     },
-    [setTimerTick]
+    [dispatch]
   );
   return (
     <div className="timer">

@@ -1,27 +1,29 @@
+import { useQuizData } from "../context/QuizContext";
 import PropTypes from "prop-types";
 
 Options.propTypes = {
-  question: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  answer: PropTypes.any,
+  question: PropTypes.any,
 };
 
-export default function Options({ question, dispatch, answer }) {
+export default function Options({ question }) {
+  const { answer, dispatch } = useQuizData();
+
   const hasAnswered = answer !== null;
+
   return (
     <div className="options">
-      {question.options.map((option, index) => (
+      {question.options.map((option, i) => (
         <button
-          className={`btn btn-option ${index === answer ? "answer" : ""} ${
+          className={`btn btn-option ${i === answer ? "answer" : ""} ${
             hasAnswered
-              ? index === question.correctOption
+              ? i === question.correctOption
                 ? "correct"
                 : "wrong"
               : ""
           }`}
           key={option}
           disabled={hasAnswered}
-          onClick={() => dispatch({ type: "newAnswer", payload: index })}
+          onClick={() => dispatch({ type: "newAnswer", payload: i })}
         >
           {option}
         </button>

@@ -1,7 +1,13 @@
-import { useQuizData } from "../context/QuizContext";
+import PropTypes from "prop-types";
 
-export default function NextButton() {
-  const { answer, index, numQuestions, dispatch } = useQuizData();
+NextButton.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  answer: PropTypes.any,
+  numQuestions: PropTypes.number.isRequired,
+  index: PropTypes.number,
+};
+
+export default function NextButton({ dispatch, answer, index, numQuestions }) {
   if (answer === null) return null;
 
   if (index < numQuestions - 1) {
